@@ -5,3 +5,35 @@ M Reza Khalafi Notes
 07/04/2023
 
 ===================================================================================================================================================
+
+STRUCTURE
+
+1) node_modules = Berisi file NPM, gausah dimodifikasi
+2) public = Berisi file yang terbuka public seperti assets/ js/ images/ untuk dimasukan ke hosting folder public_html
+3) src = Berisi file core dari vue JS
+
+===================================================================================================================================================
+
+<?= 1. Instance Object Vue ?>
+
+    Buat <div id="app> Isi HTML </div>
+    Dan deklarasi pada script 
+    const vm = new Vue({
+        el: '#app', = Div pembungkus
+        data: {
+            name: 'Doremi Fasilasido', = Bisa ditaruh sebagai external variabel
+            message: "Hello World!"
+        }
+    })
+
+<?= 2. Mengakses Object Vue ?>
+
+    Buka console.log dan ketikan vm, vm.$data 
+    Bahkan bisa assign variabel dengan mengetikan vm.$data.name = "Nama Baru"
+    Juga vm.$el.innerHTML = "<h1>Hello World</h1>" = Akan mereplace semua HTML
+
+<?= 3. ?>
+
+
+
+===================================================================================================================================================

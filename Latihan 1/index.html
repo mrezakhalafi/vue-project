@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Beginners.</title>
+</head>
+<style>
+    body{
+        margin: 5%;
+        font-family: 'Quicksand', sans-serif;
+    }
+</style>
+<body>
+
+<div id="app">
+
+    <header id="header">
+        <img src="image/logo.png" width="80">
+        <h1>What is Vue.js</h1>
+        <p>The Progressive Javascript Framework</p>
+    </header>
+    
+    <footer id="footer">
+        <p>Copyright 2023</p>
+    </footer>
+    
+</div>
+    
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+<script>
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            name: 'Doremi Fasilasido',
+            message: "Hello World!"
+        }
+    });
+
+</script>
+</body>
+</html>
