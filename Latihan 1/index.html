@@ -18,7 +18,9 @@
 
     <header id="header">
         <img src="image/logo.png" width="80">
-        <h1>What is Vue.js</h1>
+        <h1 v-text="name"></h1>
+        <h1 v-html="link"></h1>
+        <p>Bilangan ini adalah {{ infoBilangan }}</p>
         <p>The Progressive Javascript Framework</p>
     </header>
     
@@ -35,7 +37,32 @@
         el: '#app',
         data: {
             name: 'Doremi Fasilasido',
-            message: "Hello World!"
+            message: "Hello World!",
+            qty: 1,
+            namaDepan: "Reza",
+            namaBelakang: "Khalafi",
+            bilangan: 6,
+            link: "<a href=''>Link</a>"
+        },
+        methods: {
+            getName: function(){
+                return "Hello " + this.name;
+            },
+            ubahNama: function(namaBaru){
+                this.name = namaBaru;
+                return this.getName();
+            }
+        },
+        computed: {
+            totalBayar: function(){
+                return this.qty * 10000;
+            },
+            namaLengkap: function(){
+                return this.namaDepan + this.namaBelakang;
+            },
+            infoBilangan: function(){
+                return this.bilangan %2 == 0 ? 'Genap' : 'Ganjil';
+            }
         }
     });
 

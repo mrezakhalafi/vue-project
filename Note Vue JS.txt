@@ -32,8 +32,61 @@ STRUCTURE
     Bahkan bisa assign variabel dengan mengetikan vm.$data.name = "Nama Baru"
     Juga vm.$el.innerHTML = "<h1>Hello World</h1>" = Akan mereplace semua HTML
 
-<?= 3. ?>
+<?= 3. Interpolation / Template Syntak ?>
 
+    {{ name }} = Otomatis berubah ketika kita ubah dari vm.$data.name
+    <h1 v-once> {{ name }} </h1> = Data tidak bisa diubah
 
+    Bisa juga operator JS biasa seperti {{ 1+1 }} dan {{ "Hello" + name.toUpperCase() }} dan if ternary
+
+<?= 4. Method ?>
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            name: 'Doremi Fasilasido',
+            message: "Hello World!"
+        },
+        methods: {
+            getName: function(){
+                return "Hello " + this.name; = Wajib dengan this
+            },
+            ubahNama: function(namaBaru){
+                this.name = namaBaru; = Dengan parameter, bisa langsung dipanggil di console.log = vm.ubahNama("Reza")
+                return this.getName(); = Bisa juga memanggil fungsi diri sendiri
+            }
+        }
+    });
+    Panggil di HTML dengan {{ getName() }}
+
+<?= 5. Computed Property ?>
+
+    Property yang dicetak pada HTML {{ namaLengkap }} padahal isinya adalah sebuah fungsi JS
+        const vm = new Vue({
+                namaLengkap: function(){
+                    return this.namaDepan + this.namaBelakang;
+                }
+            }
+        });
+    Menggantikan langsung mencetak {{ namaDepan + namaBelakang }}
+
+    Atau mengubah 
+        <h1>Bilangan ini adalah : {{ bilangan %2 == 0 ? 'Ganjil' : 'Genap' }}</h1>
+    Menjadi 
+        <h1>Bilangan ini adalah : {{ infoBilangan }}</h1>
+    Jauh lebih simpel, karena operasi JS ditaruh pada computed Property 
+        infoBilangan: function(){
+            return this.bilangan %2 == 0 ? 'Genap' : 'Ganjil';
+        }
+
+<?= 6. Directive ?>
+
+    Directive ditempelkan pada HTML 
+        <h1 v-once> = Data tidak bisa diubah
+        <h1 v-text="name"></h1> = Mencetak string dari data: ("Reza")
+        <h1 v-html="link"></h1> = Mencetak bentuk HTML dari data: ("<a href>")
+    Dan bisa menggantikan {{ name }} seperti <h1 v-text="name"></h1>
+
+<?= 7. ?>
 
 ===================================================================================================================================================
