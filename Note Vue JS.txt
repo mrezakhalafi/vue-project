@@ -121,6 +121,8 @@ STRUCTURE
         <label><input type="checkbox" value="Angular" v-model="kelas"> Angular</label>
     Maka attribut "kelas" pada data: yang di declare sebagai array [], akan live menambah dan mengurang
 
+    Khusus untuk checkbox tambahkan <p style="white-space: pre-line"> {{ message }}</p>
+
 <?= 10. V-For ?>
 
     Deklarasi array pada data:
@@ -206,6 +208,28 @@ STRUCTURE
         event.target.value = ""; = Mengosongkan input 
     }
 
-<?= 17.  ?>
+    Untuk yang lebih keren bisa gunakan v-model="kelasBaru" pada input, deklarasi kelasBaru pada data: dan ubah menjadi seperti ini
+    submit(){
+        this.kelas.push(this.kelasBaru);
+        this.kelasBaru = "";
+    }
+
+<?= 17. Component ?>
+
+    Deklarasi suatu element untuk dipanggil berkali2 nantinya, tapi tidak memiliki data yang sama
+    Tulis pada <script> 
+            Vue.component('footer-component',{
+                template: `
+                <footer id="footer">
+                    <p>Copyright 2023</p>
+                </footer>`
+            }
+    Dengan 2 parameter, 1 = Nama component, 2 = Pair key, untuk template = Isi dari HTML nya 
+
+    Lalu panggil pada HTML dengan 
+        <footer-component></footer-component>
+
+<?= 18. ?>
+
 
 ===================================================================================================================================================

@@ -38,7 +38,7 @@
         <a href="#" v-bind:class="{ active: menu === 'about' }" @click="switchMenu('about', $event)">About</a>
         <a href="#" v-bind:class="{ active: menu === 'blog' }" @click="switchMenu('blog', $event)">Blog</a> -->
 
-        <input v-on:keyup.enter="submit(event)">
+        <input v-on:keyup.enter="submit()" v-model="kelasBaru">
 
         <template v-show="kelas.length">
             <ul>
@@ -92,6 +92,7 @@
             gambar: "image/logo.png",
             menu: "home",
             kelas: ["Golang","PHP","Phyton"],
+            kelasBaru: "",
             numbers: [1,2,3,4,5],
             object : [
                 {
@@ -129,10 +130,9 @@
                     return angka %2 == 0;
                 })
             },
-            submit(event){
-                let text = event.target.value;
-                this.kelas.push(text);
-                event.target.value = "";
+            submit(){
+                this.kelas.push(this.kelasBaru);
+                this.kelasBaru = "";
             }
         },
         computed: {

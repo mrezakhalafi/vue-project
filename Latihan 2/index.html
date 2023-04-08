@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Beginners.</title>
+</head>
+<style>
+    body{
+        margin: 5%;
+        font-family: 'Quicksand', sans-serif;
+    }
+
+    .active{
+        background: salmon;
+        padding: 5px;
+        border: 0;
+    }
+</style>
+<body>
+
+<div id="app">
+    
+    <header-component></header-component>
+
+    <main>
+        <h3>Tambah Kelas.</h3>
+        <input v-on:keyup.enter="submit()" v-model="kelasBaru">
+
+        <hr>
+        <h3>Daftar Kelas ({{ kelas.length }})</h3>
+
+        <template v-show="kelas.length">
+            <ul>
+                <li v-for="(item,index) of kelas">{{ index+1 }} - {{ item }}</li>
+            </ul>
+            <li v-else>Data tidak ditemukan</li>
+       </template>
+
+    </main>
+    
+    <footer-component></footer-component>
+    
+</div>
+    
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+<script>
+
+    Vue.component('header-component',{
+        template: `    
+        <header id="header">
+            <img src="image/logo.png" width="80">
+            <p><h1 v-text="name"></h1></p>
+            <p>The Progressive Javascript Framework</p>
+        </header>`
+    });
+
+    Vue.component('footer-component',{
+        template: `
+        <footer id="footer">
+            <p>Copyright 2023</p>
+        </footer>
+        `
+    })
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            kelas: ["Golang","PHP","Phyton"],
+            kelasBaru: "",
+        },
+        methods: {
+            submit(){
+                this.kelas.push(this.kelasBaru);
+                this.kelasBaru = "";
+            }
+        },
+        computed: {
+        }
+    });
+
+</script>
+</body>
+</html>
