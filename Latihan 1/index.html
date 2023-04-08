@@ -34,9 +34,9 @@
 
         <!-- <button v-on:click="handleClick">Ditekan</button> -->
 
-        <button v-bind:class="{ active: menu === 'home' }" @click="switchMenu('home')">Home</button>
-        <button v-bind:class="{ active: menu === 'about' }" @click="switchMenu('about')">About</button>
-        <button v-bind:class="{ active: menu === 'blog' }" @click="switchMenu('blog')">Blog</button>
+        <a href="#" v-bind:class="{ active: menu === 'home' }" @click="switchMenu('home', $event)">Home</a>
+        <a href="#" v-bind:class="{ active: menu === 'about' }" @click="switchMenu('about', $event)">About</a>
+        <a href="#" v-bind:class="{ active: menu === 'blog' }" @click="switchMenu('blog', $event)">Blog</a>
 
         <input v-model="name">
 
@@ -120,7 +120,8 @@
             handleClick: function(){
                 return this.bilangan++;
             },
-            switchMenu: function(menuBaru){
+            switchMenu: function(menuBaru, event){
+                event.preventDefault();
                 this.menu = menuBaru;
             },
             caribilangangenap: function(data){

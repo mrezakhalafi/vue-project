@@ -183,6 +183,19 @@ STRUCTURE
         <input type="password" name="password" key="password-input">
     Agar terjadi perenderan ulang dari awal
 
-<?= 15. ?>
+<?= 15. Event Handler ?>
+
+    Taruh pada parameter kedua pada sebuah function di HTML 
+        @click="switchMenu('home', $event)"
+    Lalu tangkap pada function seperti
+        switchMenu: function(menuBaru, event){
+            event.preventDefault();
+            this.menu = menuBaru;
+        }
+    event digunakan selayaknya JS biasa, ada .stop .capture .self dll
+
+    Untuk .preventDefault bisa langsung pada directive seperti v-on:click.prevent="switchMenu('home')"
+
+<?= 16.  ?>
 
 ===================================================================================================================================================
