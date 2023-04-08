@@ -40,9 +40,10 @@
 
         <input v-model="name">
 
-       <ul>
+        <ul v-show="kelas.length">
             <li v-for="(item,index) of kelas">{{ index+1 }} - {{ item }}</li>
-       </ul>
+        </ul>
+        <li v-else>Data tidak ditemukan</li>
         
        <div>
             <label><input type="checkbox" value="React" v-model="kelas"> React</label>
@@ -50,11 +51,11 @@
             <label><input type="checkbox" value="Angular" v-model="kelas"> Angular</label>
         </div>
 
-        <h3>Mencari data bilangan Genap dari Number:</h3>
+        <!-- <h3>Mencari data bilangan Genap dari Number:</h3> -->
 
-        <ul>
+        <!-- <ul>
             <li v-for="num in caribilangangenap(numbers)">{{ num }}</li>
-        </ul>
+        </ul> -->
 
     </header>
     
@@ -79,7 +80,7 @@
             link: "<a href=''>Link</a>",
             gambar: "image/logo.png",
             menu: "home",
-            kelas: ['Golang','PHP','Phyton'],
+            kelas: ["Golang","PHP","Phyton"],
             numbers: [1,2,3,4,5]
         },
         methods: {
