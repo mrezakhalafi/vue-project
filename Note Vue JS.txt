@@ -103,7 +103,52 @@ STRUCTURE
         }
     Dan panggil dengan v-on:click="handleClick" = Bisa tanpa ()
 
-<?= 8. ?>
+<?= 8. Class Binding ?>
+
+    <button v-bind:class="{ active: menu === 'home' }" @click="menu = 'home'">Home</button>
+    <button v-bind:class="{ active: menu === 'about' }" @click="menu = 'about'">About</button>
+    <button v-bind:class="{ active: menu === 'blog' }" @click="menu = 'blog'">Blog</button>
+    Dengan pembacaan, cetak class "Active" jika memenuhi kondisi attribut menu pada data adalah "Home" { Class : Kondisi }
+
+<?= 9. V-Model / Two Ways Data Binding ?>
+
+    Pakai <input v-model="name"> pada tag HTML agar 
+        - Input menampilkan attribut dari data:
+        - Ketika input berubah maka live attribut data juga berubah (Tambahkan cetak jika mau melihat)
+    Termasuk untuk checkbox :
+        <label><input type="checkbox" value="React" v-model="kelas"> React</label>
+        <label><input type="checkbox" value="Vue JS" v-model="kelas"> Vue JS</label>
+        <label><input type="checkbox" value="Angular" v-model="kelas"> Angular</label>
+    Maka attribut "kelas" pada data: yang di declare sebagai array [], akan live menambah dan mengurang
+
+<?= 10. V-For ?>
+
+    Deklarasi array pada data:
+     data: {
+            kelas: ['Golang','PHP','Phyton']
+        }
+    Lalu bisa di loop dengan 
+        <li v-for="item of kelas" v-text="item"></li>
+        <li v-for="item in kelas">{{ item }}</li>
+    Mau pake of / in atau {{ }} / v-text juga bisa 
+
+    Untuk index bisa ditambahkan pada 
+       v-for="(item,index) of kelas" maka bisa dicetak {{ index }}
+
+<?= 11. Function in For ?>    
+
+    <li v-for="num in caribilangangenap(numbers)">{{ num }}</li>
+    Maka sebelum numbers di cetak per loop nya akan menjalankan fungsi caribilangangenap()
+
+    caribilangangenap: function(data){
+        return data.filter(angka => {
+            return angka %2 == 0;
+        })
+    }
+    Filter seperti JS native seperti biasa
+
+<?= 12. ?>    
+
 
 
 ===================================================================================================================================================
