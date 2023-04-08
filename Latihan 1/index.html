@@ -40,11 +40,13 @@
 
         <input v-model="name">
 
-        <ul v-show="kelas.length">
-            <li v-for="(item,index) of kelas">{{ index+1 }} - {{ item }}</li>
-        </ul>
-        <li v-else>Data tidak ditemukan</li>
-        
+        <template v-show="kelas.length">
+            <ul>
+                <li v-for="(item,index) of kelas">{{ index+1 }} - {{ item }}</li>
+            </ul>
+            <li v-else>Data tidak ditemukan</li>
+       </template>
+
        <div>
             <label><input type="checkbox" value="React" v-model="kelas"> React</label>
             <label><input type="checkbox" value="Vue JS" v-model="kelas"> Vue JS</label>

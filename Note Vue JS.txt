@@ -156,7 +156,9 @@ STRUCTURE
     Jika data array pada kelas ada isinya maka loop li
     Tambahkan else tepat di bawah div if (Tidak perlu kondisi apapun)
         <li v-else>Data tidak ditemukan</li>
+        
     Kerennya lagi ini semua terhubung, jadi kalo tidak ada data masuk ke else, dan ketika checkbox tambah data otomatis masuk ke if
+    Jauh lebih baik kalo if ditaruh pada tag <template></template
 
 <?= 13. V-Show ?>
 
