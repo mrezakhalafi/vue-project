@@ -34,11 +34,11 @@
 
         <!-- <button v-on:click="handleClick">Ditekan</button> -->
 
-        <a href="#" v-bind:class="{ active: menu === 'home' }" @click="switchMenu('home', $event)">Home</a>
+        <!-- <a href="#" v-bind:class="{ active: menu === 'home' }" @click="switchMenu('home', $event)">Home</a>
         <a href="#" v-bind:class="{ active: menu === 'about' }" @click="switchMenu('about', $event)">About</a>
-        <a href="#" v-bind:class="{ active: menu === 'blog' }" @click="switchMenu('blog', $event)">Blog</a>
+        <a href="#" v-bind:class="{ active: menu === 'blog' }" @click="switchMenu('blog', $event)">Blog</a> -->
 
-        <input v-model="name">
+        <input v-on:keyup.enter="submit(event)">
 
         <template v-show="kelas.length">
             <ul>
@@ -47,11 +47,11 @@
             <li v-else>Data tidak ditemukan</li>
        </template>
 
-       <div>
+       <!-- <div>
             <label><input type="checkbox" value="React" v-model="kelas"> React</label>
             <label><input type="checkbox" value="Vue JS" v-model="kelas"> Vue JS</label>
             <label><input type="checkbox" value="Angular" v-model="kelas"> Angular</label>
-        </div>
+        </div> -->
 
         <!-- <h3>Mencari data bilangan Genap dari Number:</h3> -->
 
@@ -60,9 +60,9 @@
         </ul> -->
 
         <ul>
-            <template>
+            <!-- <template>
                 <li v-for="(value, index) in object">{{ index+1 }} . {{ value.name }} Jurusan {{ value.study }}</li>
-            </template>
+            </template> -->
             <!-- <template>
                 <li v-for="(value, name, index) in singleObject">{{ index+1 }} . {{ name }} {{ value }}</li>
             </template> -->
@@ -128,6 +128,11 @@
                 return data.filter(angka => {
                     return angka %2 == 0;
                 })
+            },
+            submit(event){
+                let text = event.target.value;
+                this.kelas.push(text);
+                event.target.value = "";
             }
         },
         computed: {

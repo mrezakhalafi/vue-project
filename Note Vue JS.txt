@@ -196,6 +196,16 @@ STRUCTURE
 
     Untuk .preventDefault bisa langsung pada directive seperti v-on:click.prevent="switchMenu('home')"
 
-<?= 16.  ?>
+<?= 16. Key Modifier ?>
+
+    <input v-on:keyup.enter="submit(event)">
+    Ketika input keyup dan tombolnya adalah enter maka jalankan fungsi JS 
+    submit(event){
+        let text = event.target.value; = Mengambil value JS Native
+        this.kelas.push(text); = Setelah enter, maka array data: kelas bertambah
+        event.target.value = ""; = Mengosongkan input 
+    }
+
+<?= 17.  ?>
 
 ===================================================================================================================================================
