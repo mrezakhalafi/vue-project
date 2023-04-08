@@ -79,7 +79,7 @@ STRUCTURE
             return this.bilangan %2 == 0 ? 'Genap' : 'Ganjil';
         }
 
-<?= 6. Directive ?>
+<?= 6. Directive Binding ?>
 
     Directive ditempelkan pada HTML 
         <h1 v-once> = Data tidak bisa diubah
@@ -87,6 +87,23 @@ STRUCTURE
         <h1 v-html="link"></h1> = Mencetak bentuk HTML dari data: ("<a href>")
     Dan bisa menggantikan {{ name }} seperti <h1 v-text="name"></h1>
 
-<?= 7. ?>
+    Bisa juga ditambahkan expresi dari JS biasa, seperti
+    v-text="bilangan * 5" atau v-text="bilangan.toUpperCase()"
+
+    Khusus untuk attribut seperti gambar yang di declare pada data:, tidak bisa langsung src="{{ gambar }}"
+    Tapi harus seperti ini
+    <img v-bind:src="gambar">
+
+<?= 7. Event ?>
+
+    Gunakan v-on:click="" untuk memanggil fungsi JS, bisa juga dengan @click="" ( @ hanya untuk v:on )
+    Isinya bisa langsung seperti v-on:click="bilangan++" atau deklarasi pada method 
+        handleClick: function(){
+            return this.bilangan++;
+        }
+    Dan panggil dengan v-on:click="handleClick" = Bisa tanpa ()
+
+<?= 8. ?>
+
 
 ===================================================================================================================================================

@@ -17,11 +17,16 @@
 <div id="app">
 
     <header id="header">
-        <img src="image/logo.png" width="80">
-        <h1 v-text="name"></h1>
-        <h1 v-html="link"></h1>
+        <!-- <img src="image/logo.png" width="80"> -->
+        <h1 v-text="bilangan"></h1>
+        <!-- <h1 v-html="link"></h1> -->
         <p>Bilangan ini adalah {{ infoBilangan }}</p>
-        <p>The Progressive Javascript Framework</p>
+
+        <img v-bind:src="gambar" width="500">
+
+        <!-- <p>The Progressive Javascript Framework</p> -->
+
+        <button v-on:click="handleClick">Ditekan</button>
     </header>
     
     <footer id="footer">
@@ -41,8 +46,9 @@
             qty: 1,
             namaDepan: "Reza",
             namaBelakang: "Khalafi",
-            bilangan: 6,
-            link: "<a href=''>Link</a>"
+            bilangan: 1,
+            link: "<a href=''>Link</a>",
+            gambar: "image/logo.png"
         },
         methods: {
             getName: function(){
@@ -51,6 +57,9 @@
             ubahNama: function(namaBaru){
                 this.name = namaBaru;
                 return this.getName();
+            },
+            handleClick: function(){
+                return this.bilangan++;
             }
         },
         computed: {
