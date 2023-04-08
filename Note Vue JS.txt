@@ -135,6 +135,16 @@ STRUCTURE
     Untuk index bisa ditambahkan pada 
        v-for="(item,index) of kelas" maka bisa dicetak {{ index }}
 
+    Atau untuk multiple object bisa dengan 
+        <li v-for="(value,index) in object">
+            {{ index+1 }} . {{ value.name }} : {{ value.study }}
+        </li>
+
+    Atau untuk single object ingin loop pair key - value bisa dengan 
+        <li v-for="(value, name, index) in singleObject">
+            {{ index+1 }} . {{ name }} {{ value }}
+        </li>
+
 <?= 11. Function in For ?>    
 
     <li v-for="num in caribilangangenap(numbers)">{{ num }}</li>
@@ -156,7 +166,7 @@ STRUCTURE
     Jika data array pada kelas ada isinya maka loop li
     Tambahkan else tepat di bawah div if (Tidak perlu kondisi apapun)
         <li v-else>Data tidak ditemukan</li>
-        
+
     Kerennya lagi ini semua terhubung, jadi kalo tidak ada data masuk ke else, dan ketika checkbox tambah data otomatis masuk ke if
     Jauh lebih baik kalo if ditaruh pada tag <template></template
 
@@ -166,6 +176,13 @@ STRUCTURE
     Bedanya elemen tidak dihilangkan, hanya ditambah display:none, dan tidak ada v-else nya 
         <ul v-show="kelas.length">
 
-<?= 14.  ?>
+<?= 14. Key ?>
+
+    Rekomendasi untuk memberikan pembeda dari setiap element HTML, misalnya sesama input 
+        <input type="text" name="email" key="username-input">
+        <input type="password" name="password" key="password-input">
+    Agar terjadi perenderan ulang dari awal
+
+<?= 15. ?>
 
 ===================================================================================================================================================

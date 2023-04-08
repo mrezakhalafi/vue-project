@@ -59,6 +59,15 @@
             <li v-for="num in caribilangangenap(numbers)">{{ num }}</li>
         </ul> -->
 
+        <ul>
+            <template>
+                <li v-for="(value, index) in object">{{ index+1 }} . {{ value.name }} Jurusan {{ value.study }}</li>
+            </template>
+            <!-- <template>
+                <li v-for="(value, name, index) in singleObject">{{ index+1 }} . {{ name }} {{ value }}</li>
+            </template> -->
+        </ul>
+
     </header>
     
     <footer id="footer">
@@ -83,7 +92,22 @@
             gambar: "image/logo.png",
             menu: "home",
             kelas: ["Golang","PHP","Phyton"],
-            numbers: [1,2,3,4,5]
+            numbers: [1,2,3,4,5],
+            object : [
+                {
+                    name: "Reza",
+                    study: "IF"
+                },
+                {
+                    name: "Leo",
+                    study: "SI"
+                }
+            ],
+            singleObject : {
+                name : "Henry",
+                study : "IF",
+                address : "Cipinang"
+            }
         },
         methods: {
             getName: function(){
