@@ -366,8 +366,18 @@ STRUCTURE
         <router-view :items="kelas" v-on:hapuskelas="hapuskelas" v-on:inputkelas="inputkelas"></router-view>
     Maka di tempat <router-view akan berubah ubah sesuai path dari /Home yang menampilkan template dari const Home
 
-<?= 25. ?>
+<?= 25. Router History Mode ?>
 
+    Secara default router menggunakan history sehingga ada # pada URL 
+    Untuk mengubahnya tambahkan
+        const router = new VueRouter({
+            mode: 'history',
+            routes
+        });
+    Dengan catatan, aplikasi harus berjalan di web server, jika tidak maka akan error URL = C:// (Not Found)
+    Untuk menjalankan PHP local server, buka terminal dan masuk ke CD aplikasi dan ketikan 
+        php -S localhost:3000
 
+<?= 26.  ?>
 
 ===================================================================================================================================================

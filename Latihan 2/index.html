@@ -60,8 +60,8 @@
             <h3>Daftar Kelas ({{ items.length }})</h3>
             <template v-show="items.length">
                 <ul>
-                    <li v-for="(item,index) of items">{{ index+1 }} - {{ item }}
-                        <a href="" v-on:click.prevent="$emit('hapuskelas', index)">Hapus</a>
+                    <li v-for="(item,index) of items">{{ index+1 }} - {{ item.judul }}
+                        <a href="" v-on:click.prevent="$emit('hapuskelas', item.id)">Hapus</a>
                     </li>
                 </ul>
                 <li v-else>Data tidak ditemukan</li>
@@ -83,6 +83,7 @@
     ]
 
     const router = new VueRouter({
+        mode: 'history',
         routes
     });
 
@@ -119,12 +120,16 @@
             'home' : Home
         },
         data: {
-            kelas: ["Golang","PHP","Phyton"],
+            kelas: [
+                {id: 1, judul: 'Vue JS', deskripsi: 'Deskripsi 1', gambar: 'https://positivethinking.tech/wp-content/uploads/2021/01/Logo-Vuejs.png'},
+                {id: 2, judul: 'React JS', deskripsi: 'Deskripsi 2', gambar: 'https://www.datocms-assets.com/45470/1631110818-logo-react-js.png'},
+                {id: 3, judul: 'Angular JS', deskripsi: 'Deskripsi 3', gambar: 'https://s3-ap-south-1.amazonaws.com/trt-blog-ghost/2023/01/AngularJS.png'}
+            ],
             kelasBaru: ""
         },
         methods: {
-           hapuskelas: function(index){
-                this.kelas.splice(index, 1);
+           hapuskelas: function(id){
+                this.kelas = this.kelas.filter(item => item.id != id);
            },
            inputkelas: function(event){
             let text = event.target.value;
