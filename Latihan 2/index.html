@@ -44,9 +44,6 @@
 <script type="module">
     import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
     console.log(uuidv4()); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
-</script>
-
-<script>
 
     const Home = {
         template: `<div>Home</div>`
@@ -69,8 +66,9 @@
                     <textarea v-model="kelas.deskripsi"></textarea>
                 </div>
                 <div class="input-group">
+                    <img :src="imagepreview" v-if="imagepreview">
                     <label>Masukan Gambar<label><br>
-                    <input type="file">
+                    <input type="file" v-on:change="upload">
                 </div>
                 <button type="submit">Submit</button>
             </form>
@@ -79,7 +77,7 @@
             <h3>Daftar Kelas ({{ items.length }})</h3>
             <template v-show="items.length">
                 <ul>
-                    <li v-for="(item,index) of items">{{ index+1 }} - {{ item.judul }}
+                    <li v-for="(item,index) of items">{{ index+1 }} - {{ item.judul }} - {{ item.deskripsi }} - {{ item.gambar }}
                         <a href="" v-on:click.prevent="$emit('hapuskelas', item.id)">Hapus</a>
                     </li>
                 </ul>
@@ -92,21 +90,30 @@
                     judul: '',
                     deskripsi: '',
                     gambar: ''
-                }
+                },
+                imagepreview: ''
             }
         },
         methods: {
-            submitKelas: function(){
+            submitkelas: function(){
                 const data = {
                     id: uuidv4(),
                     judul: this.kelas.judul,
                     deskripsi: this.kelas.deskripsi,
-                    gambar: null 
+                    gambar: this.kelas.gambar 
                 }
-                this.$emit('submitkelas', this.kelas);
+                this.$emit('inputkelas', data);
 
                 this.kelas.judul = '';
                 this.kelas.deskripsi = '';
+            },
+            upload: function(event){
+
+                let imagename = event.target.files[0].name;
+
+                this.kelas.gambar = imagename;
+                this.imagepreview = URL.createObjectURL(event.target.files[0]);
+
             }
         }
     }

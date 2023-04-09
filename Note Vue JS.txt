@@ -387,7 +387,23 @@ STRUCTURE
     Dan panggil variabelnya dengan 
         uuidv4(); = '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
-<?= 27. ?>
+<?= 27. Preview & Upload Image ?>
+
+    Buat IMG
+        <img :src="imagepreview" v-if="imagepreview">
+    Buat Input
+        <input type="file" v-on:change="upload">
+    Deklarasi data pada component
+         data: function(){
+            return{
+                imagepreview: ''
+            }
+    Deklarasi function pada component
+        upload: function(event){
+            let imagename = event.target.files[0].name;
+            this.kelas.gambar = imagename;
+            this.imagepreview = URL.createObjectURL(event.target.files[0]); 
+        }
 
 
 
