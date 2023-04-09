@@ -22,23 +22,9 @@
 
 <div id="app">
     
-    <header-component></header-component>
+    <header-component nama="Vue JS New" images="../Latihan 1/image/logo.png"></header-component>
 
-    <main>
-        <h3>Tambah Kelas.</h3>
-        <input v-on:keyup.enter="submit()" v-model="kelasBaru">
-
-        <hr>
-        <h3>Daftar Kelas ({{ kelas.length }})</h3>
-
-        <template v-show="kelas.length">
-            <ul>
-                <li v-for="(item,index) of kelas">{{ index+1 }} - {{ item }}</li>
-            </ul>
-            <li v-else>Data tidak ditemukan</li>
-       </template>
-
-    </main>
+    <class-component :items="kelas" :input="kelasBaru"></class-component>
     
     <footer-component></footer-component>
     
@@ -48,33 +34,63 @@
 <script>
 
     Vue.component('header-component',{
+        props: ['nama','images'],
         template: `    
         <header id="header">
-            <img src="image/logo.png" width="80">
+            <img :src="images" width="80">
             <p><h1 v-text="name"></h1></p>
-            <p>The Progressive Javascript Framework</p>
-        </header>`
+            <p>Hello {{ nama }}</p>
+        </header>`,
+        data: function(){
+            return{
+                pesan: "Hello Component"
+            }
+        }
     });
 
-    Vue.component('footer-component',{
+    Vue.component('class-component',{
+        props: ['items','input'],
         template: `
-        <footer id="footer">
-            <p>Copyright 2023</p>
-        </footer>
-        `
-    })
+        <main>
+            <h3>Tambah Kelas.</h3>
+            <input v-on:keyup.enter="submit()" v-model="input">
+            <hr>
+            <h3>Daftar Kelas ({{ items.length }})</h3>
+            <template v-show="items.length">
+                <ul>
+                    <li v-for="(item,index) of items">{{ index+1 }} - {{ item }}</li>
+                </ul>
+                <li v-else>Data tidak ditemukan</li>
+            </template>
+        </main>`,
+        data: function(){
+            return{
 
-    const vm = new Vue({
-        el: '#app',
-        data: {
-            kelas: ["Golang","PHP","Phyton"],
-            kelasBaru: "",
+            }
         },
         methods: {
             submit(){
                 this.kelas.push(this.kelasBaru);
                 this.kelasBaru = "";
             }
+        }
+    })
+
+    Vue.component('footer-component',{
+        template: `
+        <footer id="footer">
+            <p>Copyright 2023</p>
+        </footer>`
+    })
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            kelas: ["Golang","PHP","Phyton"],
+            kelasBaru: ""
+        },
+        methods: {
+           
         },
         computed: {
         }

@@ -94,6 +94,8 @@ STRUCTURE
     Tapi harus seperti ini
     <img v-bind:src="gambar">
 
+    v-bind bisa juga disingkat menjadi :src
+
 <?= 7. Event ?>
 
     Gunakan v-on:click="" untuk memanggil fungsi JS, bisa juga dengan @click="" ( @ hanya untuk v:on )
@@ -229,7 +231,63 @@ STRUCTURE
     Lalu panggil pada HTML dengan 
         <footer-component></footer-component>
 
-<?= 18. ?>
+    Inget, deklarasi component harus di atas dari vm = new Vue()
 
+<?= 18. Data Pada Component ?>
+
+    Vue.component('header-component',{
+        template: `    
+        <header id="header">
+            <img src="image/logo.png" width="80">
+            <p><h1 v-text="name"></h1></p>
+            <p v-text="pesan">{{ pesan }}</p>
+        </header>`,
+        data: function(){
+            return{
+                pesan: "Hello Component"
+            }
+        }
+    });
+    Selain template, bisa juga masukan data dengan bentukan function (Dokumentasi) dan mereturn sebuah data yang bisa dipakai pada template
+
+<?= 19. Props ?>
+
+    Taruh data pada HTML
+        <header-component nama="Vue JS New" images="../Latihan 1/image/logo.png"></header-component>
+    Lalu tangkap pada Vue Component 
+          Vue.component('header-component',{
+            props: ['nama','images'], = Tangkap Props
+            template: `    
+            <header id="header">
+                <img :src="images" width="80">
+                <p><h1 v-text="name"></h1></p>
+                <p>Hello {{ nama }}</p> = Maka Props Bisa Digunakan
+            </header>`,
+        });
+    Jika deklarasi HTML berkali2 maka bisa menampilkan hasil yang berbeda2 sesuai props data 
+
+<?= 20. Melempar Data dari Component Parent ke Component Children ?>
+
+    Jika ingin data mengambil dari parent, tidak tiap component declare data maka bisa di transfer dengan 
+        <class-component :items="kelas" :input="kelasBaru"></class-component>
+    Dengan pembacaan v-bind:items / :items = kelas, items adalah nama props baru dan kelas adalah data pada parent component
+    Maka pada JS nya 
+         Vue.component('class-component',{
+            props: ['items','input'], = Kedua props ini mempunyai nama baru yang di declare pada HTML
+            template: `
+            <main>
+                <h3>Tambah Kelas.</h3>
+                <input v-on:keyup.enter="submit()" v-model="input"> = = kelasBaru menjadi input (Mengikuti nama baru)
+                <hr>
+                <h3>Daftar Kelas ({{ items.length }})</h3> = kelas.length menjadi items.length (Mengikuti nama baru)
+                <template v-show="items.length">
+                    <ul>
+                        <li v-for="(item,index) of items">{{ index+1 }} - {{ item }}</li>
+                    </ul>
+                    <li v-else>Data tidak ditemukan</li>
+                </template>
+            </main>`,
+
+<?= 21. ?>
 
 ===================================================================================================================================================
