@@ -405,6 +405,23 @@ STRUCTURE
             this.imagepreview = URL.createObjectURL(event.target.files[0]); 
         }
 
+<?= 28. 404 / Not Found ?>
 
+    const routes = [
+        {path: '/' , component: Home},
+        {path: '*' , component: NotFound}
+    ];
+    Jika ditemukan maka panggil Home, jika tidak * maka akan diarahkan ke component NotFound 
+    const NotFound = {
+        template: `<div>Halaman Tidak Ditemukan</div>`
+    }
+
+<?= 28. Ref & $Refs ?>
+
+    Ini untuk case menghapus nama file input ketika sudah submit form, $refs (Bawaan Vue JS) untuk mengambil nama ref (Bawaan HTML) namenya 
+    Beri label pada HTML 
+        <input type="file" ref="gambar" v-on:change="upload">
+    Tangkap pada JS 
+        this.$refs.gambar.value = '';
 
 ===================================================================================================================================================

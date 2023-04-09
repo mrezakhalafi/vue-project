@@ -53,6 +53,10 @@
         template: `<div>About</div>`
     }
 
+    const NotFound = {
+        template: `<div>Halaman Tidak Ditemukan</div>`
+    }
+
     const Kelas = {
         props: ['items','input'],
         template: `
@@ -66,9 +70,9 @@
                     <textarea v-model="kelas.deskripsi"></textarea>
                 </div>
                 <div class="input-group">
-                    <img :src="imagepreview" v-if="imagepreview">
+                    <img :src="imagepreview" v-if="imagepreview" width="200">
                     <label>Masukan Gambar<label><br>
-                    <input type="file" v-on:change="upload">
+                    <input type="file" ref="gambar" v-on:change="upload">
                 </div>
                 <button type="submit">Submit</button>
             </form>
@@ -77,8 +81,12 @@
             <h3>Daftar Kelas ({{ items.length }})</h3>
             <template v-show="items.length">
                 <ul>
-                    <li v-for="(item,index) of items">{{ index+1 }} - {{ item.judul }} - {{ item.deskripsi }} - {{ item.gambar }}
-                        <a href="" v-on:click.prevent="$emit('hapuskelas', item.id)">Hapus</a>
+                    <li v-for="(item,index) of items">
+                        <img :src="item.gambar" width="200">
+                        <p>
+                            {{ index+1 }} - {{ item.judul }} - {{ item.deskripsi }} - {{ item.gambar }}
+                            <a href="" v-on:click.prevent="$emit('hapuskelas', item.id)">Hapus</a>
+                        </p>
                     </li>
                 </ul>
                 <li v-else>Data tidak ditemukan</li>
@@ -106,6 +114,9 @@
 
                 this.kelas.judul = '';
                 this.kelas.deskripsi = '';
+                this.kelas.gambar = '';
+                this.imagepreview = '';
+                this.$refs.gambar.value = '';
             },
             upload: function(event){
 
@@ -121,7 +132,8 @@
     const routes = [
         {path: '/' , component: Home},
         {path: '/about' , component: About},
-        {path: '/kelas' , component: Kelas}
+        {path: '/kelas' , component: Kelas},
+        {path: '*' , component: NotFound}
     ]
 
     const router = new VueRouter({
