@@ -378,6 +378,17 @@ STRUCTURE
     Untuk menjalankan PHP local server, buka terminal dan masuk ke CD aplikasi dan ketikan 
         php -S localhost:3000
 
-<?= 26.  ?>
+<?= 26. Generate Random ID ?>
+
+    Dari github, pakai CDN dengan 
+        <script type="module">
+            import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+        </script>
+    Dan panggil variabelnya dengan 
+        uuidv4(); = '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
+
+<?= 27. ?>
+
+
 
 ===================================================================================================================================================

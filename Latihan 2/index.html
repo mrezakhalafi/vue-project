@@ -40,6 +40,12 @@
     
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.8.1/vue-router.js"></script> 
+
+<script type="module">
+    import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+    console.log(uuidv4()); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
+</script>
+
 <script>
 
     const Home = {
@@ -55,7 +61,20 @@
         template: `
         <main>
             <h3>Tambah Kelas.</h3>
-            <input v-on:keyup.enter="$emit('inputkelas', $event)" v-model="input">
+         
+            <form v-on:submit.prevent="submitkelas">
+                <p><input type="text" v-model="kelas.judul" placeholder="Nama Kelas"></p>
+                <div class="input-group">
+                    <label>Deskripsi<label><br>
+                    <textarea v-model="kelas.deskripsi"></textarea>
+                </div>
+                <div class="input-group">
+                    <label>Masukan Gambar<label><br>
+                    <input type="file">
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+
             <hr>
             <h3>Daftar Kelas ({{ items.length }})</h3>
             <template v-show="items.length">
@@ -69,10 +88,26 @@
         </main>`,
         data: function(){
             return{
-
+                kelas:{
+                    judul: '',
+                    deskripsi: '',
+                    gambar: ''
+                }
             }
         },
         methods: {
+            submitKelas: function(){
+                const data = {
+                    id: uuidv4(),
+                    judul: this.kelas.judul,
+                    deskripsi: this.kelas.deskripsi,
+                    gambar: null 
+                }
+                this.$emit('submitkelas', this.kelas);
+
+                this.kelas.judul = '';
+                this.kelas.deskripsi = '';
+            }
         }
     }
 
@@ -131,10 +166,8 @@
            hapuskelas: function(id){
                 this.kelas = this.kelas.filter(item => item.id != id);
            },
-           inputkelas: function(event){
-            let text = event.target.value;
-                this.kelas.push(text);
-                event.target.value = "";
+           inputkelas: function(data){
+                this.kelas.push(data);
            }
         },
         computed: {
