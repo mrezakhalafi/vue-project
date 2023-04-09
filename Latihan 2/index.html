@@ -24,7 +24,8 @@
     
     <header-component nama="Vue JS New" images="../Latihan 1/image/logo.png"></header-component>
 
-    <class-component :items="kelas" :input="kelasBaru"></class-component>
+    <class-component :items="kelas" :input="kelasBaru" v-on:hapuskelas="hapuskelas"></class-component>
+    <home></home>
     
     <footer-component></footer-component>
     
@@ -32,6 +33,10 @@
     
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
 <script>
+
+    const Home = {
+        template: `<div>Home</div>`
+    }
 
     Vue.component('header-component',{
         props: ['nama','images'],
@@ -58,7 +63,9 @@
             <h3>Daftar Kelas ({{ items.length }})</h3>
             <template v-show="items.length">
                 <ul>
-                    <li v-for="(item,index) of items">{{ index+1 }} - {{ item }}</li>
+                    <li v-for="(item,index) of items">{{ index+1 }} - {{ item }}
+                        <a href="" v-on:click.prevent="$emit('hapuskelas', index    )">Hapus</a>
+                    </li>
                 </ul>
                 <li v-else>Data tidak ditemukan</li>
             </template>
@@ -85,12 +92,17 @@
 
     const vm = new Vue({
         el: '#app',
+        components: {
+            'home' : Home
+        },
         data: {
             kelas: ["Golang","PHP","Phyton"],
             kelasBaru: ""
         },
         methods: {
-           
+           hapuskelas: function(index){
+                this.kelas.splice(index, 1);
+           }
         },
         computed: {
         }

@@ -229,7 +229,7 @@ STRUCTURE
     Dengan 2 parameter, 1 = Nama component, 2 = Pair key, untuk template = Isi dari HTML nya 
 
     Lalu panggil pada HTML dengan 
-        <footer-component></footer-component>
+        <footer-component></footer-component> = (Nama harus huruf kecil, dan dipisah -, hindari conflict dengan HTML asli)
 
     Inget, deklarasi component harus di atas dari vm = new Vue()
 
@@ -288,6 +288,39 @@ STRUCTURE
                 </template>
             </main>`,
 
-<?= 21. ?>
+<?= 21. Local Component ?>
+
+    Deklarasi sebelum vm = new Vue()
+        const Home = {
+            template: `<div>Home</div>`
+        } = Variabel bebas 
+    Maka pada VM bisa di daftarkan 
+         const vm = new Vue({
+            el: '#app',
+            components: {
+                'home' : Home = 'home' bebas, Home adalah nama const di atas
+            },
+        ])
+    Kemudian pada HTML bisa dipanggil dengan 
+        <home></home>
+
+<?= 22. Emit Custom Events ?>
+
+    Parent akan mendengarkan perubahan yang dilakukan oleh childrennya (Karena data ada di parent, butuh izin $emit)
+    Pada element children buat $emit dengan nama parameter pertama bebas
+        <a href="" v-on:click.prevent="$emit('hapuskelas', index)">Hapus</a>
+    Lalu nama parameter tersebut akan di declare pada HTML 
+        <class-component :items="kelas" :input="kelasBaru" v-on:hapuskelas="hapuskelas"></class-component>
+    Dengan v-onhapuskelas = nama emit, dan = "hapuskelas" adalah nama fungsi baru 
+    Buatlah nama fungsi baru tersebut pada parent 
+        const vm = new Vue({
+            el: '#app',
+            methods: {
+            hapuskelas: function(index){
+                this.kelas.splice(index, 1);
+            }
+        });
+
+<?= 23. ?>
 
 ===================================================================================================================================================
