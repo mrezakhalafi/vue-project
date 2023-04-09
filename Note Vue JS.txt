@@ -335,6 +335,39 @@ STRUCTURE
 
 <?= 24. Router ?>
 
+    Ambil dari CDN 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.8.1/vue-router.js"></script>
+    Buat component 
+        const Home = {
+            template: `<div>Home</div>`
+        }
+    Buat array routes 
+        const routes = [
+            {path: '/' , component: Home},
+            {path: '/about' , component: About},
+            {path: '/kelas' , component: Kelas}
+        ]
+    Deklarasi router berisi routes 
+        const router = new VueRouter({
+            routes
+        });
+    Taruh pada vm = new Vue()
+        const vm = new Vue({
+            el: '#app',
+            router = Nama harus router (Dokumentasi)
+        })
+    Buat navbar perpindahan nenggunakan <router-link
+        <nav>
+            <router-link to="/">Home</router-link>
+            <router-link to="/About">About</router-link>
+            <router-link to="/Kelas">Kelas</router-link>
+        </nav>
+    Taruh view di tempat ingin berganti, dengan melampirkan semua directive 
+        <router-view :items="kelas" v-on:hapuskelas="hapuskelas" v-on:inputkelas="inputkelas"></router-view>
+    Maka di tempat <router-view akan berubah ubah sesuai path dari /Home yang menampilkan template dari const Home
+
+<?= 25. ?>
+
 
 
 ===================================================================================================================================================

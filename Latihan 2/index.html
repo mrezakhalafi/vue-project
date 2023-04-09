@@ -24,36 +24,33 @@
     
     <header-component nama="Vue JS New" images="../Latihan 1/image/logo.png"></header-component>
 
-    <class-component :items="kelas" v-on:hapuskelas="hapuskelas" v-on:inputkelas="inputkelas"></class-component>
-    <home></home>
-    
+    <nav>
+        <router-link to="/">Home</router-link>
+        <router-link to="/About">About</router-link>
+        <router-link to="/Kelas">Kelas</router-link>
+    </nav>
+
+    <!-- <class-component :items="kelas" v-on:hapuskelas="hapuskelas" v-on:inputkelas="inputkelas"></class-component> -->
+    <!-- <home></home> -->
+    <router-view :items="kelas" v-on:hapuskelas="hapuskelas" v-on:inputkelas="inputkelas"></router-view>
+
     <footer-component><p>Copyright 2023</p></footer-component>
     
 </div>
     
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.8.1/vue-router.js"></script> 
 <script>
 
     const Home = {
         template: `<div>Home</div>`
     }
 
-    Vue.component('header-component',{
-        props: ['nama','images'],
-        template: `    
-        <header id="header">
-            <img :src="images" width="80">
-            <p><h1 v-text="name"></h1></p>
-            <p>Hello {{ nama }}</p>
-        </header>`,
-        data: function(){
-            return{
-                pesan: "Hello Component"
-            }
-        }
-    });
+    const About = {
+        template: `<div>About</div>`
+    }
 
-    Vue.component('class-component',{
+    const Kelas = {
         props: ['items','input'],
         template: `
         <main>
@@ -77,6 +74,35 @@
         },
         methods: {
         }
+    }
+
+    const routes = [
+        {path: '/' , component: Home},
+        {path: '/about' , component: About},
+        {path: '/kelas' , component: Kelas}
+    ]
+
+    const router = new VueRouter({
+        routes
+    });
+
+    Vue.component('header-component',{
+        props: ['nama','images'],
+        template: `    
+        <header id="header">
+            <img :src="images" width="80">
+            <p><h1 v-text="name"></h1></p>
+            <p>Hello {{ nama }}</p>
+        </header>`,
+        data: function(){
+            return{
+                pesan: "Hello Component"
+            }
+        }
+    });
+
+    Vue.component('class-component',{
+        
     })
 
     Vue.component('footer-component',{
@@ -88,6 +114,7 @@
 
     const vm = new Vue({
         el: '#app',
+        router,
         components: {
             'home' : Home
         },
