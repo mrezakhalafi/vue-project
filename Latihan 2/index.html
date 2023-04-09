@@ -24,10 +24,10 @@
     
     <header-component nama="Vue JS New" images="../Latihan 1/image/logo.png"></header-component>
 
-    <class-component :items="kelas" :input="kelasBaru" v-on:hapuskelas="hapuskelas"></class-component>
+    <class-component :items="kelas" v-on:hapuskelas="hapuskelas" v-on:inputkelas="inputkelas"></class-component>
     <home></home>
     
-    <footer-component></footer-component>
+    <footer-component><p>Copyright 2023</p></footer-component>
     
 </div>
     
@@ -58,13 +58,13 @@
         template: `
         <main>
             <h3>Tambah Kelas.</h3>
-            <input v-on:keyup.enter="submit()" v-model="input">
+            <input v-on:keyup.enter="$emit('inputkelas', $event)" v-model="input">
             <hr>
             <h3>Daftar Kelas ({{ items.length }})</h3>
             <template v-show="items.length">
                 <ul>
                     <li v-for="(item,index) of items">{{ index+1 }} - {{ item }}
-                        <a href="" v-on:click.prevent="$emit('hapuskelas', index    )">Hapus</a>
+                        <a href="" v-on:click.prevent="$emit('hapuskelas', index)">Hapus</a>
                     </li>
                 </ul>
                 <li v-else>Data tidak ditemukan</li>
@@ -76,17 +76,13 @@
             }
         },
         methods: {
-            submit(){
-                this.kelas.push(this.kelasBaru);
-                this.kelasBaru = "";
-            }
         }
     })
 
     Vue.component('footer-component',{
         template: `
         <footer id="footer">
-            <p>Copyright 2023</p>
+            <slot></slot>
         </footer>`
     })
 
@@ -102,6 +98,11 @@
         methods: {
            hapuskelas: function(index){
                 this.kelas.splice(index, 1);
+           },
+           inputkelas: function(event){
+            let text = event.target.value;
+                this.kelas.push(text);
+                event.target.value = "";
            }
         },
         computed: {

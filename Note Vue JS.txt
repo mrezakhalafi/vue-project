@@ -321,6 +321,20 @@ STRUCTURE
             }
         });
 
-<?= 23. ?>
+<?= 23. Slot ?>
+
+    Mengambil isi dari sebuah component HTML misal :
+        <header-component>Ambil Saya</header-component>
+    Ambil dengan 
+         Vue.component('footer-component',{
+            template: `
+            <footer id="footer">
+                <slot></slot>
+            </footer>`
+        })
+
+<?= 24. Router ?>
+
+
 
 ===================================================================================================================================================
