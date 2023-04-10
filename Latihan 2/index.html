@@ -99,10 +99,13 @@
 
       const detailKelas = {
         template: `<div>
-                        <img :src="detailKelas.gambar" width="200">
-                        <h3>{{ detailKelas.judul }} - {{ $route.params.id }}</h3>
-                        <p>{{ detailKelas.deskripsi }}</p>
-                        <router-link to="/kelas">Kembali</router-link>
+                        <template v-if="detailKelas">
+                            <img :src="detailKelas.gambar" width="200">
+                            <h3>{{ detailKelas.judul }} - {{ $route.params.id }}</h3>
+                            <p>{{ detailKelas.deskripsi }}</p>
+                            <router-link to="/kelas">Kembali</router-link>
+                        </template>
+                        <p v-else>Kelas tidak ada</p>
                     </div>`,
         data() {
           return {
@@ -114,11 +117,22 @@
         },
         methods: {
           filterKelas() {
-            let kelas = JSON.parse(localStorage.getItem("kelas"));
+            // let kelas = JSON.parse(localStorage.getItem("kelas"));
             let id = this.$route.params.id;
-            let data = kelas.filter((item) => item.id == id);
+            // let data = kelas.filter((item) => item.id == id);
 
-            this.detailKelas = data[0];
+            // this.detailKelas = data[0];
+
+            const kelasRef = ref(db, "kelas/" + id);
+            onValue(
+              kelasRef,
+              (snapshot) => {
+                this.detailKelas = snapshot.val();
+              },
+              (error) => {
+                console.error("Error getting data:", error);
+              }
+            );
           },
         },
       };
@@ -296,7 +310,7 @@
             const newKelasRef = push(kelasRef);
             set(newKelasRef, {
               judul: data.judul,
-              deksripsi: data.deskripsi,
+              deskripsi: data.deskripsi,
               gambar: data.gambar,
             });
             Swal.fire("Data berhasil di input.");
