@@ -498,6 +498,17 @@ STRUCTURE
     destroyed()
     Jika terjadi ada perubahan, updated() baru run, contoh merubah input / data (Dipanggil berkali-kali) sedangkan created() hanya dipanggil sekali
 
-<?= 32.  ?>
+<?= 32. Preview Edit / Send ID Content ?>
+
+    Untuk mengirimkan ke halaman edit gunakan 
+        <router-link :to="'/kelas/'+item.id">Lihat Kelas</router-link>
+    Dengan :to adalah v-bind yang harus dipakai saat menggunakan <router-link (Pengganti A dalam Vue) dan isi to adalah gabungan string '/kelas' dengan variabel JS + item.id
+    Lalu tambahkan pada routes
+        const routes = [
+            { path: "/kelas/:id", component: detailKelas }
+        ];
+    Dengan :id menandakan bahwa pada path tersebut kita mengirimkan data, dengan nama id = bebas
+
+<?= 33.  ?>
 
 ===================================================================================================================================================

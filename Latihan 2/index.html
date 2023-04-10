@@ -36,8 +36,6 @@
         <router-link to="/Kelas">Kelas</router-link>
       </nav>
 
-      <!-- <class-component :items="kelas" v-on:hapuskelas="hapuskelas" v-on:inputkelas="inputkelas"></class-component> -->
-      <!-- <home></home> -->
       <router-view
         :items="kelas"
         v-on:hapuskelas="hapuskelas"
@@ -53,7 +51,7 @@
 
     <script type="module">
       import { v4 as uuidv4 } from "https://jspm.dev/uuid";
-      console.log(uuidv4()); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
+      console.log(uuidv4());
 
       const Home = {
         template: `<div>Home</div>`,
@@ -65,6 +63,10 @@
 
       const NotFound = {
         template: `<div>Halaman Tidak Ditemukan</div>`,
+      };
+
+      const detailKelas = {
+        template: `<div>Hello, Detail Kelas</div>`,
       };
 
       const Kelas = {
@@ -100,6 +102,7 @@
                         <p>
                             {{ index+1 }} - {{ item.judul }} - {{ item.deskripsi }} - {{ item.gambar }}
                             <a href="" v-on:click.prevent="$emit('hapuskelas', item.id)">Hapus</a>
+                            <router-link :to="'/kelas/'+item.id">Lihat Kelas</router-link>
                         </p>
                     </li>
                 </ul>
@@ -162,6 +165,7 @@
         { path: "/", component: Home },
         { path: "/about", component: About },
         { path: "/kelas", component: Kelas },
+        { path: "/kelas/:id", component: detailKelas },
         { path: "*", component: NotFound },
       ];
 
