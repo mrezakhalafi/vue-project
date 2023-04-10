@@ -596,6 +596,9 @@ M Reza Khalafi Notes
             },
         }
 
+    Untuk mengambil detail / halaman detail cukup tambahkan pada 
+        const kelasRef = ref(db, "kelas/" + id);
+
 <?= 38. Insert data ke Database ?>
 
     Tambahkan set dan push pada import 
