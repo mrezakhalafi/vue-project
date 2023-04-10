@@ -49,6 +49,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.8.1/vue-router.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script type="module">
       import { v4 as uuidv4 } from "https://jspm.dev/uuid";
@@ -209,10 +210,13 @@
         methods: {
           hapuskelas: function (id) {
             this.kelas = this.kelas.filter((item) => item.id != id);
+            localStorage.setItem("kelas", JSON.stringify(this.kelas));
+            Swal.fire("Data berhasil di hapus.");
           },
           inputkelas: function (data) {
             this.kelas.push(data);
             localStorage.setItem("kelas", JSON.stringify(this.kelas));
+            Swal.fire("Data berhasil di input.");
           },
         },
         computed: {},
