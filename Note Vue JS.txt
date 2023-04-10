@@ -424,4 +424,38 @@ STRUCTURE
     Tangkap pada JS 
         this.$refs.gambar.value = '';
 
+<?= 29. Validation ?>
+
+    Ada VueValidate, tapi untuk saat ini pakai cara manual
+
+    Buat <div untuk errornya 
+        <div class="error" v-if="error.judul">{{ error.judul }}</div>
+    Deklrasi object error pada data: 
+        data: function () {
+          return {
+            error: {
+              judul: "",
+              deskripsi: "",
+            },
+          };
+        }
+    Kemudian tambahkan pada function on Submit
+        submitkelas: function () {
+            this.error.judul = ""; = Untuk mengosongkan kembali setiap sebelum validasi
+            this.error.deskripsi = "";
+
+            if (this.kelas.judul == "") { = Mengisi ke data error
+                this.error.judul = "Judul is required"; = Menampilkan pada HTML
+            }
+            if (this.kelas.deskripsi == "") {
+                this.error.deskripsi = "Deskripsi is required";
+            }
+
+            if (this.kelas.judul && this.kelas.deskripsi) { = Jika keduanya terisi baru lanjut
+                // Jalankan Fungsi Insert
+            };
+        };
+
+<?= 30.  ?>
+
 ===================================================================================================================================================

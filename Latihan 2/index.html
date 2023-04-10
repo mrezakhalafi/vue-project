@@ -1,75 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vue Beginners.</title>
-</head>
-<style>
-    body{
-        margin: 5%;
-        font-family: 'Quicksand', sans-serif;
+  </head>
+  <style>
+    body {
+      margin: 5%;
+      font-family: "Quicksand", sans-serif;
     }
 
-    .active{
-        background: salmon;
-        padding: 5px;
-        border: 0;
+    .active {
+      background: salmon;
+      padding: 5px;
+      border: 0;
     }
-</style>
-<body>
 
-<div id="app">
-    
-    <header-component nama="Vue JS New" images="../Latihan 1/image/logo.png"></header-component>
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <header-component
+        nama="Vue JS New"
+        images="https://positivethinking.tech/wp-content/uploads/2021/01/Logo-Vuejs.png"
+      ></header-component>
 
-    <nav>
+      <nav>
         <router-link to="/">Home</router-link>
         <router-link to="/About">About</router-link>
         <router-link to="/Kelas">Kelas</router-link>
-    </nav>
+      </nav>
 
-    <!-- <class-component :items="kelas" v-on:hapuskelas="hapuskelas" v-on:inputkelas="inputkelas"></class-component> -->
-    <!-- <home></home> -->
-    <router-view :items="kelas" v-on:hapuskelas="hapuskelas" v-on:inputkelas="inputkelas"></router-view>
+      <!-- <class-component :items="kelas" v-on:hapuskelas="hapuskelas" v-on:inputkelas="inputkelas"></class-component> -->
+      <!-- <home></home> -->
+      <router-view
+        :items="kelas"
+        v-on:hapuskelas="hapuskelas"
+        v-on:inputkelas="inputkelas"
+      ></router-view>
 
-    <footer-component><p>Copyright 2023</p></footer-component>
-    
-</div>
-    
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.8.1/vue-router.js"></script> 
+      <footer-component><p>Copyright 2023</p></footer-component>
+    </div>
 
-<script type="module">
-    import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
-    console.log(uuidv4()); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.8.1/vue-router.js"></script>
 
-    const Home = {
-        template: `<div>Home</div>`
-    }
+    <script type="module">
+      import { v4 as uuidv4 } from "https://jspm.dev/uuid";
+      console.log(uuidv4()); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
-    const About = {
-        template: `<div>About</div>`
-    }
+      const Home = {
+        template: `<div>Home</div>`,
+      };
 
-    const NotFound = {
-        template: `<div>Halaman Tidak Ditemukan</div>`
-    }
+      const About = {
+        template: `<div>About</div>`,
+      };
 
-    const Kelas = {
-        props: ['items','input'],
+      const NotFound = {
+        template: `<div>Halaman Tidak Ditemukan</div>`,
+      };
+
+      const Kelas = {
+        props: ["items", "input"],
         template: `
         <main>
             <h3>Tambah Kelas.</h3>
-         
+
             <form v-on:submit.prevent="submitkelas">
-                <p><input type="text" v-model="kelas.judul" placeholder="Nama Kelas"></p>
+                <p>
+                    <input type="text" v-model="kelas.judul" placeholder="Nama Kelas">
+                    <div class="error" v-if="error.judul">{{ error.judul }}</div>
+                </p>
                 <div class="input-group">
                     <label>Deskripsi<label><br>
                     <textarea v-model="kelas.deskripsi"></textarea>
+                    <div class="error" v-if="error.deskripsi">{{ error.deskripsi }}</div>
                 </div>
-                <div class="input-group">
+                <div class="input-group" style="margin-top: 20px; margin-bottom: 10px">
                     <img :src="imagepreview" v-if="imagepreview" width="200">
                     <label>Masukan Gambar<label><br>
                     <input type="file" ref="gambar" v-on:change="upload">
@@ -92,107 +105,136 @@
                 <li v-else>Data tidak ditemukan</li>
             </template>
         </main>`,
-        data: function(){
-            return{
-                kelas:{
-                    judul: '',
-                    deskripsi: '',
-                    gambar: ''
-                },
-                imagepreview: ''
-            }
+        data: function () {
+          return {
+            kelas: {
+              judul: "",
+              deskripsi: "",
+              gambar: "",
+            },
+            imagepreview: "",
+            error: {
+              judul: "",
+              deskripsi: "",
+            },
+          };
         },
         methods: {
-            submitkelas: function(){
-                const data = {
-                    id: uuidv4(),
-                    judul: this.kelas.judul,
-                    deskripsi: this.kelas.deskripsi,
-                    gambar: this.kelas.gambar 
-                }
-                this.$emit('inputkelas', data);
+          submitkelas: function () {
+            this.error.judul = "";
+            this.error.deskripsi = "";
 
-                this.kelas.judul = '';
-                this.kelas.deskripsi = '';
-                this.kelas.gambar = '';
-                this.imagepreview = '';
-                this.$refs.gambar.value = '';
-            },
-            upload: function(event){
-
-                let imagename = event.target.files[0].name;
-
-                this.kelas.gambar = imagename;
-                this.imagepreview = URL.createObjectURL(event.target.files[0]);
-
+            if (this.kelas.judul == "") {
+              this.error.judul = "Judul is required";
             }
-        }
-    }
+            if (this.kelas.deskripsi == "") {
+              this.error.deskripsi = "Deskripsi is required";
+            }
 
-    const routes = [
-        {path: '/' , component: Home},
-        {path: '/about' , component: About},
-        {path: '/kelas' , component: Kelas},
-        {path: '*' , component: NotFound}
-    ]
+            if (this.kelas.judul && this.kelas.deskripsi) {
+              const data = {
+                id: uuidv4(),
+                judul: this.kelas.judul,
+                deskripsi: this.kelas.deskripsi,
+                gambar: this.kelas.gambar,
+              };
 
-    const router = new VueRouter({
-        mode: 'history',
-        routes
-    });
+              this.$emit("inputkelas", data);
 
-    Vue.component('header-component',{
-        props: ['nama','images'],
-        template: `    
+              this.kelas.judul = "";
+              this.kelas.deskripsi = "";
+              this.kelas.gambar = "";
+              this.imagepreview = "";
+              this.$refs.gambar.value = "";
+            }
+          },
+          upload: function (event) {
+            let imagename = event.target.files[0].name;
+
+            this.kelas.gambar = imagename;
+            this.imagepreview = URL.createObjectURL(event.target.files[0]);
+          },
+        },
+      };
+
+      const routes = [
+        { path: "/", component: Home },
+        { path: "/about", component: About },
+        { path: "/kelas", component: Kelas },
+        { path: "*", component: NotFound },
+      ];
+
+      const router = new VueRouter({
+        mode: "history",
+        routes,
+      });
+
+      Vue.component("header-component", {
+        props: ["nama", "images"],
+        template: `
         <header id="header">
             <img :src="images" width="80">
             <p><h1 v-text="name"></h1></p>
             <p>Hello {{ nama }}</p>
         </header>`,
-        data: function(){
-            return{
-                pesan: "Hello Component"
-            }
-        }
-    });
+        data: function () {
+          return {
+            pesan: "Hello Component",
+          };
+        },
+      });
 
-    Vue.component('class-component',{
-        
-    })
+      Vue.component("class-component", {});
 
-    Vue.component('footer-component',{
+      Vue.component("footer-component", {
         template: `
         <footer id="footer">
             <slot></slot>
-        </footer>`
-    })
+        </footer>`,
+      });
 
-    const vm = new Vue({
-        el: '#app',
+      const vm = new Vue({
+        el: "#app",
         router,
         components: {
-            'home' : Home
+          home: Home,
         },
         data: {
-            kelas: [
-                {id: 1, judul: 'Vue JS', deskripsi: 'Deskripsi 1', gambar: 'https://positivethinking.tech/wp-content/uploads/2021/01/Logo-Vuejs.png'},
-                {id: 2, judul: 'React JS', deskripsi: 'Deskripsi 2', gambar: 'https://www.datocms-assets.com/45470/1631110818-logo-react-js.png'},
-                {id: 3, judul: 'Angular JS', deskripsi: 'Deskripsi 3', gambar: 'https://s3-ap-south-1.amazonaws.com/trt-blog-ghost/2023/01/AngularJS.png'}
-            ],
-            kelasBaru: ""
+          kelas: [
+            {
+              id: 1,
+              judul: "Vue JS",
+              deskripsi: "Deskripsi 1",
+              gambar:
+                "https://positivethinking.tech/wp-content/uploads/2021/01/Logo-Vuejs.png",
+            },
+            {
+              id: 2,
+              judul: "React JS",
+              deskripsi: "Deskripsi 2",
+              gambar:
+                "https://www.datocms-assets.com/45470/1631110818-logo-react-js.png",
+            },
+            {
+              id: 3,
+              judul: "Angular JS",
+              deskripsi: "Deskripsi 3",
+              gambar:
+                "https://s3-ap-south-1.amazonaws.com/trt-blog-ghost/2023/01/AngularJS.png",
+            },
+          ],
+          kelasBaru: "",
         },
         methods: {
-           hapuskelas: function(id){
-                this.kelas = this.kelas.filter(item => item.id != id);
-           },
-           inputkelas: function(data){
-                this.kelas.push(data);
-           }
+          hapuskelas: function (id) {
+            this.kelas = this.kelas.filter((item) => item.id != id);
+          },
+          inputkelas: function (data) {
+            this.kelas.push(data);
+          },
         },
-        computed: {
-        }
-    });
-
-</script>
-</body>
+        computed: {},
+      });
+    </script>
+  </body>
 </html>
