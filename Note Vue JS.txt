@@ -605,12 +605,30 @@ M Reza Khalafi Notes
             this.kelas = []; = Kosongkan agar tidak terjadi penumpukan (Karena auto refresh)
             const newKelasRef = push(kelasRef);
             set(newKelasRef, { = Set ke database pada firebase
-              judul: data.judul,
-              deksripsi: data.deskripsi,
-              gambar: data.gambar,
+                judul: data.judul,
+                deksripsi: data.deskripsi,
+                gambar: data.gambar,
             });
             Swal.fire("Data berhasil di input.");
           }
 
+<?= 39. Hapus data ke Database ?>
+
+   Tambahkan remove pada import 
+        import { getDatabase, ref, onValue, set, push, remove } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+    Pada methods hapukelas tambahkan 
+        methods: {
+            hapuskelas: function (id) {
+                const kelasRef = ref(db, "kelas/" + id);
+                remove(kelasRef)
+                .then(() => {
+                    Swal.fire("Data berhasil di hapus.");
+                })
+                .catch((error) => {
+                    Swal.fire(error);
+                });
+            }
+
+<?= 40.  ?>
 
 ===================================================================================================================================================
