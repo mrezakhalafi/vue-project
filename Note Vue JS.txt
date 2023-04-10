@@ -475,6 +475,29 @@ STRUCTURE
             }
          });
 
-<?= 31.  ?>
+<?= 31. Lifecycle Hooks ?>
+
+    Suatu alur dari awal hingga akhir dari suatu element terender pada DOM
+    new Vue() = Langkah awal inisiasi 
+    beforeCreate = Sebelum di buat
+    created() = Dijalankan setelah jadi 
+
+    Lalu ada pengecekan apakah ada #el dan templates;
+    Jika tidak ada #el, bisa digantikan dengan 
+        const vm = new Vue({
+            // Biasa
+        });
+        vm.$mount(#app);
+
+    Dan setelah itu ada banyak lagi, bisa lihat di dokumentasi
+    beforeMount()
+    mounted()
+    beforeUpdate();
+    updated()
+    beforeDestroy()
+    destroyed()
+    Jika terjadi ada perubahan, updated() baru run, contoh merubah input / data (Dipanggil berkali-kali) sedangkan created() hanya dipanggil sekali
+
+<?= 32.  ?>
 
 ===================================================================================================================================================
