@@ -282,7 +282,9 @@
             Swal.fire("Data berhasil di input.");
           },
           resultData: function (items) {
-            console.log(items.val());
+            items.forEach((item) => {
+              this.kelas.push(item.val());
+            });
           },
           errorData: function (error) {
             console.log(error);

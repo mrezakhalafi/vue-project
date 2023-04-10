@@ -587,12 +587,17 @@ M Reza Khalafi Notes
     Lalu tambahkan methodsnya juga 
         methods: {
             resultData: function (items) {
-                console.log(items.val());
+                items.forEach((item) => {
+                this.kelas.push(item.val()); = Mengisi ke data kelas
+                });
             },
             errorData: function (error) {
                 console.log(error);
             },
         }
+
+<?= 38.  ?>
+
 
 
 ===================================================================================================================================================
