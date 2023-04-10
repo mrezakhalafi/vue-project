@@ -509,6 +509,44 @@ STRUCTURE
         ];
     Dengan :id menandakan bahwa pada path tersebut kita mengirimkan data, dengan nama id = bebas
 
-<?= 33.  ?>
+<?= 33. Route Params ?>
+
+    Mengambil data dari lemparan /kelas/:id
+    Bisa diambil dengan $route.params.id;
+    Kalo :name berarti params.name
+
+<?= 34. Struktur View Detail ?>
+
+    Deklarasi detailKelas variabel
+        data() {
+            return {
+                detailKelas: {},
+            };
+        },
+    Buat methods filterKelas untuk mengambil id dari route lalu filter data sesuai ID dari localStorage 
+    methods: {
+          filterKelas() {
+            let kelas = JSON.parse(localStorage.getItem("kelas"));
+            let id = this.$route.params.id;
+            let data = kelas.filter((item) => item.id == id);
+
+            this.detailKelas = data[0];
+          },
+        }
+    Jalankan fungsi saat pertamakali run 
+        created() {
+          this.filterKelas();
+        }
+    Cetak pada HTML nya 
+        template: `<div>
+                        <img :src="detailKelas.gambar" width="200">
+                        <h3>{{ detailKelas.judul }} - {{ $route.params.id }}</h3>
+                        <p>{{ detailKelas.deskripsi }}</p>
+                        <router-link to="/kelas">Kembali</router-link>
+                    </div>`
+
+<?= 35. Firebase ?>
+
+    
 
 ===================================================================================================================================================

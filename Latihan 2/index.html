@@ -66,7 +66,29 @@
       };
 
       const detailKelas = {
-        template: `<div>Hello, Detail Kelas</div>`,
+        template: `<div>
+                        <img :src="detailKelas.gambar" width="200">
+                        <h3>{{ detailKelas.judul }} - {{ $route.params.id }}</h3>
+                        <p>{{ detailKelas.deskripsi }}</p>
+                        <router-link to="/kelas">Kembali</router-link>
+                    </div>`,
+        data() {
+          return {
+            detailKelas: {},
+          };
+        },
+        created() {
+          this.filterKelas();
+        },
+        methods: {
+          filterKelas() {
+            let kelas = JSON.parse(localStorage.getItem("kelas"));
+            let id = this.$route.params.id;
+            let data = kelas.filter((item) => item.id == id);
+
+            this.detailKelas = data[0];
+          },
+        },
       };
 
       const Kelas = {
