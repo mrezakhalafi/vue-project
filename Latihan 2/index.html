@@ -24,25 +24,7 @@
     }
   </style>
 
-  <script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyBilr8D7xS4GY8G1YCa360pvI40B97HmF0",
-      authDomain: "tutorial-vuejs-34124.firebaseapp.com",
-      projectId: "tutorial-vuejs-34124",
-      storageBucket: "tutorial-vuejs-34124.appspot.com",
-      messagingSenderId: "738902798642",
-      appId: "1:738902798642:web:e702261cfbd2afabff672b",
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
 
   <body>
     <div id="app">
@@ -73,6 +55,32 @@
     <script type="module">
       import { v4 as uuidv4 } from "https://jspm.dev/uuid";
       console.log(uuidv4());
+
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        onValue,
+      } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBilr8D7xS4GY8G1YCa360pvI40B97HmF0",
+        authDomain: "tutorial-vuejs-34124.firebaseapp.com",
+        projectId: "tutorial-vuejs-34124",
+        storageBucket: "tutorial-vuejs-34124.appspot.com",
+        messagingSenderId: "738902798642",
+        appId: "1:738902798642:web:e702261cfbd2afabff672b",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+
+      const kelasRef = ref(db, "kelas");
 
       const Home = {
         template: `<div>Home</div>`,
@@ -249,10 +257,18 @@
         },
         data: {
           kelas: [],
-          kelasBaru: "",
         },
         created() {
-          this.kelas = JSON.parse(localStorage.getItem("kelas")) || [];
+          //   this.kelas = JSON.parse(localStorage.getItem("kelas")) || [];
+          onValue(
+            kelasRef,
+            (snapshot) => {
+              this.resultData(snapshot);
+            },
+            (error) => {
+              this.errorData(error);
+            }
+          );
         },
         methods: {
           hapuskelas: function (id) {
@@ -264,6 +280,12 @@
             this.kelas.push(data);
             localStorage.setItem("kelas", JSON.stringify(this.kelas));
             Swal.fire("Data berhasil di input.");
+          },
+          resultData: function (items) {
+            console.log(items.val());
+          },
+          errorData: function (error) {
+            console.log(error);
           },
         },
         computed: {},

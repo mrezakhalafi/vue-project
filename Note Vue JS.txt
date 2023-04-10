@@ -567,7 +567,32 @@ M Reza Khalafi Notes
             gambar : gambar2.png
     Lalu pilih add
 
-<?= 37. ?>
+<?= 37. Mengambil data dari Database ?>
+
+    Tambahkan pada script module 
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+    Lalu inisisasi variabel 
+        const db = getDatabase(app);
+        const kelasRef = ref(db, "kelas");
+    Pada method created() pada new Vue() tambahkan 
+        onValue(
+            kelasRef,
+            (snapshot) => {
+              this.resultData(snapshot);
+            },
+            (error) => {
+              this.errorData(error);
+            }
+          );
+    Lalu tambahkan methodsnya juga 
+        methods: {
+            resultData: function (items) {
+                console.log(items.val());
+            },
+            errorData: function (error) {
+                console.log(error);
+            },
+        }
 
 
 ===================================================================================================================================================
