@@ -456,6 +456,25 @@ STRUCTURE
             };
         };
 
-<?= 30.  ?>
+<?= 30. Localstorage ?>
+
+    Pada saat insert simpan pada localstorage 
+        inputkelas: function (data) {
+            this.kelas.push(data);
+            localStorage.setItem("kelas", JSON.stringify(this.kelas));
+        }
+    Dan pada saat load ambil dari localstorage, kosongkan datanya 
+        data: {
+            kelas: []
+        }
+    Buat method created() yaitu fungsi yang dijalankan pertamakali saat new Vue() / component di inisiasi
+        const vm = new Vue({
+            el: "#app",
+            created() {
+                this.kelas = JSON.parse(localStorage.getItem("kelas")) || []; = Ambil dari localstorage atau jika tidak ada ambil array kosong
+            }
+         });
+
+<?= 31.  ?>
 
 ===================================================================================================================================================

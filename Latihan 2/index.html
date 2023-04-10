@@ -200,30 +200,11 @@
           home: Home,
         },
         data: {
-          kelas: [
-            {
-              id: 1,
-              judul: "Vue JS",
-              deskripsi: "Deskripsi 1",
-              gambar:
-                "https://positivethinking.tech/wp-content/uploads/2021/01/Logo-Vuejs.png",
-            },
-            {
-              id: 2,
-              judul: "React JS",
-              deskripsi: "Deskripsi 2",
-              gambar:
-                "https://www.datocms-assets.com/45470/1631110818-logo-react-js.png",
-            },
-            {
-              id: 3,
-              judul: "Angular JS",
-              deskripsi: "Deskripsi 3",
-              gambar:
-                "https://s3-ap-south-1.amazonaws.com/trt-blog-ghost/2023/01/AngularJS.png",
-            },
-          ],
+          kelas: [],
           kelasBaru: "",
+        },
+        created() {
+          this.kelas = JSON.parse(localStorage.getItem("kelas")) || [];
         },
         methods: {
           hapuskelas: function (id) {
@@ -231,6 +212,7 @@
           },
           inputkelas: function (data) {
             this.kelas.push(data);
+            localStorage.setItem("kelas", JSON.stringify(this.kelas));
           },
         },
         computed: {},
