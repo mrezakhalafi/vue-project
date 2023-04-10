@@ -6,14 +6,6 @@ M Reza Khalafi Notes
 
 ===================================================================================================================================================
 
-STRUCTURE
-
-1) node_modules = Berisi file NPM, gausah dimodifikasi
-2) public = Berisi file yang terbuka public seperti assets/ js/ images/ untuk dimasukan ke hosting folder public_html
-3) src = Berisi file core dari vue JS
-
-===================================================================================================================================================
-
 <?= 1. Instance Object Vue ?>
 
     Buat <div id="app> Isi HTML </div>
@@ -547,6 +539,35 @@ STRUCTURE
 
 <?= 35. Firebase ?>
 
+    Buat firebase di google, lalu masuk ke web development dan buat project lagi maka nanti akan mendapatkan Firebase SDK 
+    Copy paste ke sebelum tag <body>
+    Kurang lebih isinya 
+        const firebaseConfig = {
+            apiKey: "AIzaSyBilr8D7xS4GY8G1YCa360pvI40B97HmF0",
+            authDomain: "tutorial-vuejs-34124.firebaseapp.com",
+            projectId: "tutorial-vuejs-34124",
+            storageBucket: "tutorial-vuejs-34124.appspot.com",
+            messagingSenderId: "738902798642",
+            appId: "1:738902798642:web:e702261cfbd2afabff672b"
+        };
     
+<?= 36. Configure Firebase Database ?>
+
+    Pilih menu Realtime Database, lalu pilih yang Test Mode 
+    Database ini menggunakan noSQL, jadi bukan berbentuk kolom baris melainkan seperti JSON ada pair key dan value
+    Tekan + untuk membuat key, lalu + di bawah untuk membuat anakannya sampai membentuk struktur 
+    kelas 
+        1
+            judul : Vue JS 
+            deskripsi : Deksripsi 1
+            gambar : gambar1.png 
+        2
+            judul : React JS 
+            deskripsi : Deksripsi 2
+            gambar : gambar2.png
+    Lalu pilih add
+
+<?= 37. ?>
+
 
 ===================================================================================================================================================

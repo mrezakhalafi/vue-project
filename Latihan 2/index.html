@@ -23,6 +23,27 @@
       font-size: 14px;
     }
   </style>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBilr8D7xS4GY8G1YCa360pvI40B97HmF0",
+      authDomain: "tutorial-vuejs-34124.firebaseapp.com",
+      projectId: "tutorial-vuejs-34124",
+      storageBucket: "tutorial-vuejs-34124.appspot.com",
+      messagingSenderId: "738902798642",
+      appId: "1:738902798642:web:e702261cfbd2afabff672b",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+  </script>
+
   <body>
     <div id="app">
       <header-component
