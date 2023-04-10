@@ -632,6 +632,18 @@ M Reza Khalafi Notes
                 });
             }
 
-<?= 40.  ?>
+<?= 40.  Hosting ?>
+
+    Download dan install Node.js terlebih dahulu
+    Buka terminal dan ketikan npm install -g firebase-tools
+    Lalu masuk ke directory project dan ketikan firebase login 
+    Maka akan diarahkan ke web untuk login via gmail 
+    Lalu balik ke terminal dan ketikan fireabase init
+
+    Pindahkan semua file HTML CSS JS ke dalam folder public yang baru saja terbuat 
+    Buka terminal dan ketikan firebase serve, maka akan terbuka localhost
+
+    Lalu ketikan firebase deploy
+    Maka akan dibuatkan otomatis hosting yang beralamat di https://tutorial-vuejs-34124.web.app/
 
 ===================================================================================================================================================
